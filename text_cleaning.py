@@ -1,17 +1,15 @@
-import pandas as pd
+import re
 
-from utils import * 
-from constants import *
+def substitute_re_in_text(text, re_str, new_str=''):
+    return re.sub(re_str, new_str, text)
 
-def testing():
-    path = f"{PATH_TO_DATA}/dark_180.csv"
-    df = df_from_csv_file(path)    
-    print(df)
-    print(df.shape)
-    print(df.columns)
+def remove_links_in_text(text):
+    link_re = 'http[s]?://\S+'
+    return substitute_re_in_text(text, link_re)
 
+def remove_breaklines_in_text(text):
+    return text.replace('\r\n','').replace('\n','')
 
+def remove_quotes_in_text(text):
+    return text.replace('"','').replace("'",'')
 
-if __name__ == "__main__":
-
-    testing()
